@@ -12,13 +12,11 @@ type Props = {
   params: { id: string };
 };
 
-const Page = ({ params }: Props) => {
-  const { id } = params; // Directly destructure the params
+const page = async ({ params: { id } }: Props) => {
+  const product: Product = await getProductId(id);
+  const similarProducts = await getSimilarProducts(id);
 
-  const product: Product | null = getProductId(id); // No need to await, it's not a promise
-  const similarProducts = getSimilarProducts(id); // No need to await
-
-  if (!product) redirect('/404'); // Redirect if product not found
+  if (!product) redirect('/404');
 
   return (
     <div className="product-container">
@@ -54,7 +52,7 @@ const Page = ({ params }: Props) => {
                   width={20}
                   height={20}
                 />
-                <p className="text-base font-semibold text-[#d46f77]">
+                <p className="text-base font-semibold text-[#d46f77">
                   {product?.reviewsCount}
                 </p>
               </div>
@@ -157,7 +155,7 @@ const Page = ({ params }: Props) => {
             Product Description
           </h3>
           <div className="flex flex-col gap-4 overflow-y-scroll h-[300px] p-4">
-            {product?.description.split('\n')}
+            {product?.description?.split('\n')}
           </div>
         </div>
         <button className="btn w-fit mx-auto flex items-center justify-center gap3 min-w-[200px]">
@@ -167,7 +165,7 @@ const Page = ({ params }: Props) => {
             width={22}
             height={22}
           />
-          <Link href={'/'} className="text-base text-white">
+          <Link href={'/'} className="text-base, text-white">
             Buy Now
           </Link>
         </button>
@@ -187,4 +185,4 @@ const Page = ({ params }: Props) => {
   );
 };
 
-export default Page;
+export default page;
