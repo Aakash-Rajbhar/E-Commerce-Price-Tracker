@@ -8,8 +8,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
+import { GetServerSideProps } from 'next';
+
 type Props = {
   params: { id: string };
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.params as { id: string };
+  return {
+    props: { params: { id } },
+  };
 };
 
 const page = async ({ params: { id } }: Props) => {
