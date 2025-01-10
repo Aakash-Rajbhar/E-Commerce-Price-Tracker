@@ -1,0 +1,5 @@
+added product to mongodb database
+
+video timestamp: 2:06:15
+
+video timestamp: 3:32:07 
