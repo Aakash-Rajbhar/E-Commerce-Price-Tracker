@@ -162,9 +162,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
             Product Description
           </h3>
           <div className="flex flex-col gap-4 overflow-y-scroll h-[300px] p-4">
-            {product?.description.split('\n').map((desc, index) => (
-              <p key={index}>{desc}</p>
-            ))}
+            {product?.description.split('\n')}
           </div>
         </div>
         <button className="btn w-fit mx-auto flex items-center justify-center gap3 min-w-[200px]">
@@ -182,7 +180,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
       {similarProducts && similarProducts.length > 0 && (
         <div className="py-14 flex flex-col gap-2 w-full">
-          <p className="section-text">Similar Products</p>
+          <p className="section-text">Other Products</p>
           <div className="flex flex-wrap gap-10 mt-7 w-full">
             {similarProducts.map((product) => (
               <ProductCard key={product._id} product={product} />

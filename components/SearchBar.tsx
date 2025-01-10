@@ -3,6 +3,7 @@
 import { scrapeAndStoreProduct } from '@/lib/actions';
 import { url } from 'inspector';
 import { FormEvent, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const isValidAmazonURL = (url: string) => {
   try {
@@ -42,6 +43,7 @@ const SearchBar = () => {
       setIsLoading(true);
       // Fetch the product details
       const product = await scrapeAndStoreProduct(searchPrompt);
+      toast.success('Product added successfully');
     } catch (error) {
       console.error(error);
     } finally {

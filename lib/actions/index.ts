@@ -9,6 +9,7 @@ import { log } from 'node:console';
 import { generateEmailBody, sendEmail } from '../nodemailer';
 import { send } from 'node:process';
 import { User } from '@/types';
+import { toast } from 'react-toastify';
 
 export async function scrapeAndStoreProduct(productUrl: string) {
   if (!productUrl) {
@@ -91,7 +92,7 @@ export async function getSimilarProducts(productId: string) {
 
     const similarProducts = await Product.find({
       _id: { $ne: productId },
-    }).limit(3);
+    }).limit(4);
 
     return similarProducts;
   } catch (error: any) {
@@ -107,6 +108,7 @@ export async function addUserEmailToProduct(
     const product = await Product.findById(productId);
 
     if (!product) {
+      toast.error('Product not found');
       throw new Error('Product not found');
     }
     const userExists =

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import Navbars from '@/components/Navbars';
+import { ToastContainer } from 'react-toastify';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -28,6 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${inter.variable} antialiased`}>
         <Navbars />
+        <ToastContainer position="bottom-right" theme="light" />
         <main className="max-w-10xl mx-auto">{children}</main>
       </body>
     </html>

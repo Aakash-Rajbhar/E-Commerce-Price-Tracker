@@ -18,7 +18,8 @@
     "nodemailer": "^6.9.16",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-responsive-carousel": "^3.2.23"
+    "react-responsive-carousel": "^3.2.23",
+    "react-toastify": "^11.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",

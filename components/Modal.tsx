@@ -10,6 +10,7 @@ import {
 } from '@headlessui/react';
 import Image from 'next/image';
 import { addUserEmailToProduct } from '@/lib/actions';
+import { toast } from 'react-toastify';
 
 interface Props {
   productId: string;
@@ -30,6 +31,9 @@ const Modal = ({ productId }: Props) => {
     setIsSubmitting(false);
     setEmail('');
     closeModal();
+    toast.success(
+      'You will be notified when the price changes or for other updates'
+    );
   };
 
   const openModal = () => setIsOpen(true);
