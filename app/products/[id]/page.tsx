@@ -8,7 +8,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-const Page = async ({ params }: { params: { id: string } }) => {
+type Props = {
+  params: { id: string };
+};
+
+const Page = async ({ params }: Props) => {
   const { id } = params;
 
   // Fetch product and similar products
@@ -17,6 +21,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
   // Check if product is found, else redirect
   if (!product) {
+    redirect('/404');
     return null; // Ensure that nothing renders if the product is not found
   }
 
