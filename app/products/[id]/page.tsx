@@ -8,12 +8,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-type Props = {
+type Props = Promise<{
   params: { id: string };
-};
+}>;
 
-const Page = async ({ params }: Props) => {
-  const { id } = params;
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
 
   // Fetch product and similar products
   const product: Product | null = await getProductId(id);
