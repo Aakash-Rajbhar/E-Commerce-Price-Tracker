@@ -8,24 +8,22 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { GetServerSideProps } from 'next';
-
 type Props = {
   params: { id: string };
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.params as { id: string };
-  return {
-    props: { params: { id } },
-  };
-};
+const Page = async ({ params }: Props) => {
+  const { id } = params;
 
-const page = async ({ params: { id } }: Props) => {
-  const product: Product = await getProductId(id);
-  const similarProducts = await getSimilarProducts(id);
+  // Fetch product and similar products
+  const product: Product | null = await getProductId(id);
+  const similarProducts = await getSimilarProducts(id); // Await the promise to get the array
 
-  if (!product) redirect('/404');
+  // Check if product is found, else redirect
+  if (!product) {
+    redirect('/404');
+    return null; // Ensure that nothing renders if the product is not found
+  }
 
   return (
     <div className="product-container">
@@ -61,8 +59,8 @@ const page = async ({ params: { id } }: Props) => {
                   width={20}
                   height={20}
                 />
-                <p className="text-base font-semibold text-[#d46f77">
-                  {product?.reviewsCount}
+                <p className="text-base font-semibold text-[#d46f77]">
+                  {product.reviewsCount}
                 </p>
               </div>
               <div className="p-2 bg-white rounded-10">
@@ -164,7 +162,9 @@ const page = async ({ params: { id } }: Props) => {
             Product Description
           </h3>
           <div className="flex flex-col gap-4 overflow-y-scroll h-[300px] p-4">
-            {product?.description?.split('\n')}
+            {product?.description.split('\n').map((desc, index) => (
+              <p key={index}>{desc}</p>
+            ))}
           </div>
         </div>
         <button className="btn w-fit mx-auto flex items-center justify-center gap3 min-w-[200px]">
@@ -174,13 +174,13 @@ const page = async ({ params: { id } }: Props) => {
             width={22}
             height={22}
           />
-          <Link href={'/'} className="text-base, text-white">
+          <Link href={'/'} className="text-base text-white">
             Buy Now
           </Link>
         </button>
       </div>
 
-      {similarProducts && similarProducts?.length > 0 && (
+      {similarProducts && similarProducts.length > 0 && (
         <div className="py-14 flex flex-col gap-2 w-full">
           <p className="section-text">Similar Products</p>
           <div className="flex flex-wrap gap-10 mt-7 w-full">
@@ -194,4 +194,4 @@ const page = async ({ params: { id } }: Props) => {
   );
 };
 
-export default page;
+export default Page;
