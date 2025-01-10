@@ -12,13 +12,13 @@ type Props = {
   params: { id: string };
 };
 
-const page = async ({ params }: Props) => {
-  const { id } = params;
+const Page = ({ params }: Props) => {
+  const { id } = params; // Directly destructure the params
 
-  const product: Product | null = await getProductId(id);
-  const similarProducts = await getSimilarProducts(id);
+  const product: Product | null = getProductId(id); // No need to await, it's not a promise
+  const similarProducts = getSimilarProducts(id); // No need to await
 
-  if (!product) redirect('/404');
+  if (!product) redirect('/404'); // Redirect if product not found
 
   return (
     <div className="product-container">
@@ -187,4 +187,4 @@ const page = async ({ params }: Props) => {
   );
 };
 
-export default page;
+export default Page;
