@@ -8,14 +8,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { GetServerSideProps } from 'next';
-
-type Props = {
-  params: { id: string };
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.params as { id: string };
+const Page = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
 
   // Fetch product and similar products
   const product: Product | null = await getProductId(id);
@@ -23,41 +17,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // Check if product is found, else redirect
   if (!product) {
-    return {
-      redirect: {
-        destination: '/404',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      product,
-      similarProducts,
-      id,
-    },
-  };
-};
-
-const Page = ({
-  product,
-  similarProducts,
-  id,
-}: {
-  product: Product;
-  similarProducts: Product[];
-  id: string;
-}) => {
-  // const { id } = params;
-
-  // Fetch product and similar products
-  // const product: Product | null = await getProductId(id);
-  // const similarProducts = await getSimilarProducts(id); // Await the promise to get the array
-
-  // Check if product is found, else redirect
-  if (!product) {
-    redirect('/404');
     return null; // Ensure that nothing renders if the product is not found
   }
 
