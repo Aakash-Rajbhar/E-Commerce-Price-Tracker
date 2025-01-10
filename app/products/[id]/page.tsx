@@ -13,7 +13,7 @@ type Props = {
 };
 
 const page = async ({ params }: Props) => {
-  const { id } = await params;
+  const { id } = params;
 
   const product: Product | null = await getProductId(id);
   const similarProducts = await getSimilarProducts(id);
