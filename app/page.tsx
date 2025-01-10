@@ -24,7 +24,7 @@ const Home = async () => {
             </p>
             <h1 className="head-text">
               Unleash the Power of
-              <span className="text-primary"> Price Tracker</span>
+              <span className="text-primary"> Price Lytic</span>
             </h1>
             <p className="mt-6 ">
               Powerful, self-hosted price tracking tool to help you save money

@@ -15,7 +15,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'Price Tracker',
+  title: 'Price Lytic',
   description: 'Track prices of your favorite products and sacve money',
 };
 

@@ -19,7 +19,7 @@ const Navbars = () => {
             alt="logo"
           />
           <p className="nav-logo">
-            Price <span className="text-primary">Tracker</span>
+            Price <span className="text-primary">Lytic</span>
           </p>
         </Link>
         {/* <div className="flex items-center gap-5">
